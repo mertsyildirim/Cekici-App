@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="50" viewBox="0 0 200 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Çekici İkonu -->
+  <path d="M15 25C15 22.2386 17.2386 20 20 20H30C32.7614 20 35 22.2386 35 25V30C35 32.7614 32.7614 35 30 35H20C17.2386 35 15 32.7614 15 30V25Z" fill="#3B82F6"/>
+  <path d="M30 25H40" stroke="#3B82F6" stroke-width="3" stroke-linecap="round"/>
+  <path d="M10 30H15" stroke="#3B82F6" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Metin -->
+  <text x="45" y="32" font-family="Arial" font-size="24" font-weight="bold" fill="#1F2937">
+    ÇekiciApp
+  </text>
+</svg> 
