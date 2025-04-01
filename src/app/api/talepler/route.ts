@@ -1,13 +1,13 @@
 import { NextResponse } from 'next/server';
-import clientPromise from '@/lib/mongodb';
+import { prisma } from '@/lib/prisma';
 
 export async function GET() {
   try {
-    const client = await clientPromise;
-    const db = client.db('cekiciapp');
-    const collection = db.collection('talepler');
-
-    const talepler = await collection.find({}).toArray();
+    const talepler = await prisma.talep.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
     return NextResponse.json(talepler);
   } catch (error) {
     console.error('Talepler getirilirken hata oluştu:', error);
@@ -21,21 +21,19 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const client = await clientPromise;
-    const db = client.db('cekiciapp');
-    const collection = db.collection('talepler');
-
-    const result = await collection.insertOne({
-      ...body,
-      createdAt: new Date(),
-      status: 'beklemede'
+    const talep = await prisma.talep.create({
+      data: {
+        musteriAdi: body.musteriAdi,
+        telefon: body.telefon,
+        adres: body.adres,
+        aciklama: body.aciklama,
+      },
     });
-
-    return NextResponse.json(result);
+    return NextResponse.json(talep);
   } catch (error) {
-    console.error('Talep oluşturulurken hata oluştu:', error);
+    console.error('Talep oluşturulamadı:', error);
     return NextResponse.json(
-      { error: 'Talep oluşturulurken bir hata oluştu' },
+      { error: 'Talep oluşturulamadı' },
       { status: 500 }
     );
   }
